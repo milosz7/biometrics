@@ -31,23 +31,6 @@ def binarize_iris(img):
     return masked_img
 
 
-def detect_circles(img):
-    circles = cv.HoughCircles(
-        img,
-        cv.HOUGH_GRADIENT,
-        dp=1.5,
-        minDist=10,
-        param1=100,
-        param2=10,
-        minRadius=1,
-        maxRadius=50,
-    )
-
-    for [x, y, r] in circles[0]:
-        cv.circle(img, (x, y), r, (0, 0, 255), 2)
-    return img
-
-
 def find_enclosing_circle(img):
     contours, _ = cv.findContours(img, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     if contours:
