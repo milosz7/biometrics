@@ -44,7 +44,13 @@ def evaluate_impostors(
     results, probs = [], []
     for _user, images in tqdm(impostors_dataset.items()):
         for img in images:
-            emb = model(img)
+            try:
+                emb = model(img)
+            except Exception as e:
+                print(f"Error processing image: {e}")
+                results.append(0.0)
+                probs.append(0.0)
+                continue
             cosine_similarity = calculate_cosine_similarity(emb, embeddings)
             prediction = np.argmax(cosine_similarity)
 
@@ -69,7 +75,13 @@ def evaluate_authorized(
     probs = []
     for user, images in tqdm(users_dataset.items()):
         for img in images:
-            emb = model(img)
+            try:
+                emb = model(img)
+            except Exception as e:
+                print(f"Error processing image: {e}")
+                results.append(0.0)
+                probs.append(0.0)
+                continue
             cosine_similarity = calculate_cosine_similarity(emb, embeddings)
             prediction = np.argmax(cosine_similarity)
             predicted_user = row_to_user_map[prediction]

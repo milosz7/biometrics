@@ -17,13 +17,17 @@ def init_face_analysis_model(config):
 
 
 def build_person_img_map(dir_path: str) -> dict[str, list[str]]:
-    person_img_map = defaultdict(list)
-    for filename in os.listdir(dir_path):
-        if filename.endswith(".jpg"):
-            person_id = filename.split("-")[0]
-            img_path = os.path.join(dir_path, filename)
-            person_img_map[person_id].append(img_path)
-    return person_img_map
+    try:
+        person_img_map = defaultdict(list)
+        for filename in os.listdir(dir_path):
+            if filename.endswith(".jpg"):
+                person_id = filename.split("-")[0]
+                img_path = os.path.join(dir_path, filename)
+                person_img_map[person_id].append(img_path)
+        return person_img_map
+    except FileNotFoundError:
+        print(f"Directory not found: {dir_path}. Maybe you forgot to prepare the data?")
+        raise
 
 
 def load_database(config):
