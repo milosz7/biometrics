@@ -12,6 +12,10 @@ class EmbeddingModel:
         )
         self.model.prepare(ctx_id=-1)
 
+    def get_pose(self, x: np.ndarray) -> tuple[float, float, float]:
+        result = self.model.get(x)[0]
+        return result["pose"]
+
     def __call__(self, x: np.ndarray) -> np.ndarray:
         result = self.model.get(x)[0]
         return result["embedding"]

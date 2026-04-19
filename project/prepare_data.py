@@ -29,8 +29,8 @@ def get_best_angle_imgs(
         angles = []
         for image in images:
             try:
-                result = model(image)
-                angles.append(result["pose"])
+                pose = model.get_pose(image)
+                angles.append(pose)
             except IndexError:  # detection failed
                 bad_pose = (90.0, 90.0, 90.0)  # worst possible pose
                 angles.append(bad_pose)
