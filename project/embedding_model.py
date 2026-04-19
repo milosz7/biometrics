@@ -1,4 +1,5 @@
 from insightface.app import FaceAnalysis
+import numpy as np
 
 
 class EmbeddingModel:
@@ -11,8 +12,6 @@ class EmbeddingModel:
         )
         self.model.prepare(ctx_id=-1)
 
-    def __call__(self, x):
+    def __call__(self, x: np.ndarray) -> np.ndarray:
         result = self.model.get(x)[0]
         return result["embedding"]
-
-

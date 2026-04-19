@@ -19,8 +19,8 @@ def build_path(root_dir: str, img_name: str) -> str:
 
 
 def get_best_angle_imgs(
-    img_map: dict[str, list[str]], n_imgs_per_class: int, split_frac = 0.75
-) ->tuple[list[str], list[str]]:
+    img_map: dict[str, list[str]], n_imgs_per_class: int, split_frac=0.75
+) -> tuple[list[str], list[str]]:
     config = PrepareDataConfig()
     model = EmbeddingModel(config)
     best_angle_imgs_train, best_angle_imgs_test = [], []
@@ -49,9 +49,7 @@ def get_best_angle_imgs(
     return best_angle_imgs_train, best_angle_imgs_test
 
 
-def copy_imgs(
-    paths: list[str], source_dir: str, output_dir: str
-) -> None:
+def copy_imgs(paths: list[str], source_dir: str, output_dir: str) -> None:
     os.makedirs(output_dir, exist_ok=True)
     for path in paths:
         filename = os.path.basename(path)
@@ -66,12 +64,8 @@ def main():
     users_train_data, users_test_data = get_best_angle_imgs(
         users_img_map, config.N_IMAGES_PER_USER
     )
-    copy_imgs(
-        users_train_data, config.USERS_DATA_RAW_DIR, config.TRAIN_DATA_DIR
-    )
-    copy_imgs(
-        users_test_data, config.USERS_DATA_RAW_DIR, config.USERS_DATA_DIR
-    )
+    copy_imgs(users_train_data, config.USERS_DATA_RAW_DIR, config.TRAIN_DATA_DIR)
+    copy_imgs(users_test_data, config.USERS_DATA_RAW_DIR, config.USERS_DATA_DIR)
 
     impostors_img_map = build_person_img_map(config.IMPOSTORS_DATA_RAW_DIR)
     impostors_test_data, _ = get_best_angle_imgs(

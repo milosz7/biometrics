@@ -33,7 +33,10 @@ def authenticate(img: np.ndarray) -> tuple[str, float]:
     best_user = row_to_user_map[best_idx]
 
     if best_score < config.THRESHOLD:
-        return f"Authentication failed (score={best_score:.3f} < {config.THRESHOLD}).", best_score
+        return (
+            f"Authentication failed (score={best_score:.3f} < {config.THRESHOLD}).",
+            best_score,
+        )
 
     return f"Authenticated as user {best_user}!", best_score
 
@@ -56,4 +59,3 @@ def build_ui() -> gr.Blocks:
 
 if __name__ == "__main__":
     build_ui().launch()
-

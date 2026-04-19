@@ -1,10 +1,13 @@
 import os
 from dataclasses import dataclass, field
 
+
 @dataclass
 class BaseConfig:
     FACE_ANALYSIS_MODEL = "buffalo_l"
-    FACE_ANALYSIS_MODEL_MODULES: list[str] = field(default_factory=lambda: ["detection", "recognition"])
+    FACE_ANALYSIS_MODEL_MODULES: list[str] = field(
+        default_factory=lambda: ["detection", "recognition"]
+    )
     DATA_ROOT = "data"
     STORAGE_PATH = "storage.pkl"
 

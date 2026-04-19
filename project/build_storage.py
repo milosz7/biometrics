@@ -8,9 +8,12 @@ from utils import build_person_img_map
 from embedding_model import EmbeddingModel
 
 
-def build_face_vector_storage(config):
+def build_face_vector_storage(
+    config: BuildStorageConfig,
+) -> tuple[dict[int, str], np.ndarray]:
     model = EmbeddingModel(config)
-    user_ids, embeddings = [], []
+    user_ids: list[str] = []
+    embeddings = []
 
     person_to_imgs_map = build_person_img_map(config.TRAIN_DATA_DIR)
     for person_id, img_paths in tqdm(person_to_imgs_map.items()):
