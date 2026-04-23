@@ -126,6 +126,7 @@ def evaluate_auth(config: EvaluationConfig) -> None:
 
 
 def plot_roc(y_true: list[float], y_pred_proba: list[float]) -> None:
+    y_pred_proba = [(x + 1.0) / 2.0 for x in y_pred_proba]
     fpr, tpr, thresholds = roc_curve(y_true, y_pred_proba)
     roc_auc = auc(fpr, tpr)
     plt.figure()
