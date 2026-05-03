@@ -20,11 +20,11 @@ def erode_and_get_boundary(img, radius):
 def plot_images(images, titles):
     fig, axs = plt.subplots(1, len(images), figsize=(len(images) * 3, 4))
     for n, (img, ti) in enumerate(zip(images, titles)):
-        axs[n].imshow(img, cmap='gray')
+        axs[n].imshow(img, cmap="gray")
         axs[n].set_title(ti)
-        axs[n].axis('off')
+        axs[n].axis("off")
     plt.tight_layout()
-    plt.savefig('ex01_out.png')
+    plt.savefig("ex01_out.png")
 
 
 def main(img_path):
@@ -34,9 +34,9 @@ def main(img_path):
     skel, distance = medial_axis(img, return_distance=True)
     skeleton = skel * distance
     images = [img, boundary_r1, boundary_r4, skeleton]
-    titles = ['Original Image', 'Boundary R1', 'Boundary R4', 'Skeleton']
+    titles = ["Original Image", "Boundary R1", "Boundary R4", "Skeleton"]
     plot_images(images, titles)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(sys.argv[1])

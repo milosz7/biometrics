@@ -4,6 +4,7 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def load_image(image_path):
     img = cv.imread(image_path)
     if img is None:
@@ -32,16 +33,18 @@ def apply_gamma_correction_below_threshold(image, gamma, threshold):
 def plot_and_save_image(image):
     image = image[:, :, ::-1]
     plt.axis("off")
-    plt.imshow(image, vmin=0, vmax=255) # BGR -> RGB
+    plt.imshow(image, vmin=0, vmax=255)  # BGR -> RGB
     plt.tight_layout()
     plt.savefig("ex02_out.png")
     plt.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     path = sys.argv[1]
     pixel_threshold = 100
     gamma = 0.5
     img = load_image(path)
-    gamma_corrected = apply_gamma_correction_below_threshold(img, gamma, pixel_threshold)
+    gamma_corrected = apply_gamma_correction_below_threshold(
+        img, gamma, pixel_threshold
+    )
     plot_and_save_image(gamma_corrected)

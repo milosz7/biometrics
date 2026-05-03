@@ -18,14 +18,16 @@ def main(img_path):
         param1=20,
         param2=10,
         minRadius=15,
-        maxRadius=25
+        maxRadius=25,
     )
     circles = np.around(circles).astype(np.uint8)
 
     for [x, y, r] in circles[0]:
         cv.circle(img, (x, y), r, (0, 0, 255), 2)
         cv.line(img, (x - r, y), (x + r, y), (255, 0, 0), 2)
-        plt.text(x + r // 2, y - r // 2, f"{2 * r}px", color="red", size=14, label="radius")
+        plt.text(
+            x + r // 2, y - r // 2, f"{2 * r}px", color="red", size=14, label="radius"
+        )
     plt.title(f"Found {len(circles[0])} circles.")
     legend_handles = [Line2D([0], [0], color="red", lw=2, label="radius (px)")]
     plt.legend(handles=legend_handles, loc="upper right")
